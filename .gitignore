@@ -1,0 +1,25 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*
+# Dependency directories
+jspm_packages/
+
+# Compiled source
+dist/
+build/
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+.vscode/
