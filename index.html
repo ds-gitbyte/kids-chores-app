@@ -3,25 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kids Chores App</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Kids Chores App - Interactive Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .points-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .points-box h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .points-display {
+            font-size: 3em;
+            font-weight: bold;
+        }
+        
+        .chores-section h2 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .chore-card {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+        
+        .chore-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .chore-card.completed {
+            background: #f0f0f0;
+            opacity: 0.6;
+        }
+        
+        .chore-info h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .chore-points {
+            color: #f5576c;
+            font-weight: bold;
+        }
+        
+        .btn-complete {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+        
+        .btn-complete:hover {
+            opacity: 0.8;
+        }
+        
+        .btn-complete:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .completed-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .completed-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .completed-section ul {
+            list-style: none;
+        }
+        
+        .completed-section li {
+            padding: 10px;
+            background: #f0f0f0;
+            margin: 5px 0;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to the Kids Chores App</h1>
+        <h1>🌟 Kids Chores App 🌟</h1>
+        <p>Complete your chores and earn amazing points!</p>
     </header>
-    <main>
-        <section>
-            <h2>Chores List</h2>
-            <ul>
-                <li>Task 1</li>
-                <li>Task 2</li>
-                <li>Task 3</li>
+    
+    <div class="container">
+        <div class="points-box">
+            <h2>Your Total Points</h2>
+            <div class="points-display" id="totalPoints">0</div>
+        </div>
+        
+        <div class="chores-section">
+            <h2>Today's Chores</h2>
+            <div id="choresContainer">
+                <div class="chore-card" id="chore-1">
+                    <div class="chore-info">
+                        <h3>🛏️ Make Your Bed</h3>
+                        <div class="chore-points">+10 points</div>
+                    </div>
+                    <button class="btn-complete" onclick="completeChore('chore-1', 'Make Your Bed', 10)">Complete ✓</button>
+                </div>
+                
+                <div class="chore-card" id="chore-2">
+                    <div class="chore-info">
+                        <h3>🪥 Brush Your Teeth</h3>
+                        <div class="chore-points">+5 points</div>
+                    </div>
+                    <button class="btn-complete" onclick="completeChore('chore-2', 'Brush Your Teeth', 5)">Complete ✓</button>
+                </div>
+                
+                <div class="chore-card" id="chore-3">
+                    <div class="chore-info">
+                        <h3>🧹 Clean Your Room</h3>
+                        <div class="chore-points">+15 points</div>
+                    </div>
+                    <button class="btn-complete" onclick="completeChore('chore-3', 'Clean Your Room', 15)">Complete ✓</button>
+                </div>
+                
+                <div class="chore-card" id="chore-4">
+                    <div class="chore-info">
+                        <h3>📚 Do Your Homework</h3>
+                        <div class="chore-points">+20 points</div>
+                    </div>
+                    <button class="btn-complete" onclick="completeChore('chore-4', 'Do Your Homework', 20)">Complete ✓</button>
+                </div>
+                
+                <div class="chore-card" id="chore-5">
+                    <div class="chore-info">
+                        <h3>🍽️ Help with Dinner</h3>
+                        <div class="chore-points">+15 points</div>
+                    </div>
+                    <button class="btn-complete" onclick="completeChore('chore-5', 'Help with Dinner', 15)">Complete ✓</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="completed-section">
+            <h2>✅ Completed Tasks</h2>
+            <ul id="completedList">
+                <li style="color: #999; font-style: italic;">No tasks completed yet. Start earning points! 🚀</li>
             </ul>
-        </section>
-    </main>
+        </div>
+    </div>
+    
     <footer>
-        <p>&copy; 2026 Kids Chores App</p>
+        <p>&copy; 2026 Kids Chores App - Keep up the great work! 🎉</p>
     </footer>
+    
+    <script>
+        let totalPoints = 0;
+        let completedCount = 0;
+        
+        function completeChore(choreId, choreName, points) {
+            // Add points
+            totalPoints += points;
+            document.getElementById('totalPoints').textContent = totalPoints;
+            
+            // Mark card as completed
+            const choreCard = document.getElementById(choreId);
+            choreCard.classList.add('completed');
+            
+            // Disable button
+            const button = choreCard.querySelector('.btn-complete');
+            button.disabled = true;
+            
+            // Add to completed list
+            const completedList = document.getElementById('completedList');
+            if (completedCount === 0) {
+                completedList.innerHTML = '';
+            }
+            const li = document.createElement('li');
+            li.textContent = `${choreName} - +${points} points`;
+            completedList.appendChild(li);
+            completedCount++;
+        }
+    </script>
 </body>
 </html>
