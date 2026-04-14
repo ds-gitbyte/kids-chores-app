@@ -1,0 +1,1 @@
+{\n  "name": "kids-chores-app\",\n  "version": "1.0.0\",\n  "private": true,\n  "dependencies": {\n    "express": "^4.17.1",\n    "cors": "^2.8.5"\n  },\n  "scripts": {\n    "start": "node server.js"\n  }\n}
